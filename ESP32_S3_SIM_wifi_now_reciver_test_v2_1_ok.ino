@@ -76,12 +76,12 @@ void parseURC(char c) {
           line.indexOf(",1") != -1 ||
           line.indexOf(",5") != -1) {
         lteRegistered = true;
-        Serial.println("✅ LTE REGISTERED");
+        Serial.println(" LTE REGISTERED");
       }
     }
 
     if (line == "QCRDY") {
-      Serial.println("✅ QCRDY RECEIVED");
+      Serial.println(" QCRDY RECEIVED");
       lteRegistered = false;
       sim7670.print("AT+CEREG=2\r\n");
     }
@@ -187,7 +187,7 @@ bool activatePDP() {
 
   sendAT("AT+CGPADDR=1");
   if (waitFor(".", 8000)) {
-    Serial.println("✅ PDP ACTIVE");
+    Serial.println(" PDP ACTIVE");
     return true;
   }
   return false;
@@ -214,7 +214,7 @@ bool mqttConnect() {
   return waitFor("OK", 30000);
 }
 
-/* ================= ✅ FIXED MQTT PUBLISH ================= */
+/* =================  FIXED MQTT PUBLISH ================= */
 
 void mqttPublish(const SensorData &d) {
 
@@ -274,7 +274,7 @@ void setup() {
   simPowerOn();
 
   if (!simInit()) {
-    Serial.println("❌ SIM INIT FAILED");
+    Serial.println(" SIM INIT FAILED");
   }
 
   uint32_t t0 = millis();
@@ -283,15 +283,15 @@ void setup() {
   }
 
   if (!lteRegistered) {
-    Serial.println("❌ LTE REGISTER TIMEOUT");
+    Serial.println(" LTE REGISTER TIMEOUT");
   }
 
   if (!activatePDP()) {
-    Serial.println("❌ PDP FAILED");
+    Serial.println(" PDP FAILED");
   }
 
   if (!mqttConnect()) {
-    Serial.println("❌ MQTT CONNECT FAILED");
+    Serial.println(" MQTT CONNECT FAILED");
   }
 
 
@@ -305,7 +305,7 @@ void setup() {
   esp_now_init();
   esp_now_register_recv_cb(onReceive);
 
-  Serial.println("✅ ESP-NOW READY");
+  Serial.println("ESP-NOW READY");
 }
 
 void loop() {

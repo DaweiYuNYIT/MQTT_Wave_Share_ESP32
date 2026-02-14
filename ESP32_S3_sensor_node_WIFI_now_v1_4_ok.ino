@@ -7,7 +7,7 @@ NEW SKETCH
 
 #define BOOT_PIN 0
 
-/* ====== 本地 RGB LED ====== */
+/* ====== RGB LED ====== */
 #define LED_PIN    48      // LED one wire pin
 #define LED_COUNT  1
 
